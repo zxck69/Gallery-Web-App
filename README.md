@@ -159,38 +159,6 @@ App-wide statistics.
 
 ---
 
-## 🧪 Running Tests
-
-```bash
-cd backend
-pip install pytest httpx
-pytest test_main.py -v
-```
-
-Tests cover:
-
-- Like / unlike / duplicate / 404 cases
-- Viewed upsert and 5-item limit
-- Stats aggregation
-- Prefetch background task
-
----
-
-## 🌐 Deployment
-
-### Render / Railway / Fly.io
-
-1. Set start command: `uvicorn main:app --host 0.0.0.0 --port $PORT`
-2. Set working directory to `backend/`
-3. Add `requirements.txt` build step
-4. Use a persistent disk for the SQLite DB, or swap to PostgreSQL via `asyncpg`
-
-### PostgreSQL (production upgrade)
-
-Replace the `sqlite3` calls in `main.py` with `databases` + `asyncpg`. The SQL schema is standard and fully portable.
-
----
-
 ## 🛠 Tech Stack
 
 | Layer        | Technology                              |
@@ -198,16 +166,6 @@ Replace the `sqlite3` calls in `main.py` with `databases` + `asyncpg`. The SQL s
 | Backend      | FastAPI, SQLite, httpx                  |
 | Frontend     | Vanilla JS, CSS Variables, Google Fonts |
 | External API | [Dog CEO API](https://dog.ceo/dog-api/) |
-| Testing      | pytest, httpx                           |
+|              |                                         |
 
 ---
-
-## 📸 Screenshots
-
-_(Add your screenshots here after deployment)_
-
----
-
-## 📜 License
-
-MIT

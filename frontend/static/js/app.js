@@ -2,7 +2,7 @@
    WOOF — Dog Gallery  |  app.js
    ═══════════════════════════════════════════════ */
 
-const API = '';          // same origin — FastAPI serves the frontend
+const API = 'https://gallery-web-app-ohld.onrender.com'; 
 const DOG_CEO = 'https://dog.ceo/api';
 const PAGE_SIZE = 20;    // breeds per page
 const IMG_PAGE_SIZE = 10; // images per page in modal
