@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WOOF — Dog Gallery</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/css/styles.css" />
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a class="logo" href="/" onclick="navigateTo('home'); return false;">
+      <span class="logo-icon">🐾</span>
+      <span class="logo-text">WOOF</span>
+    </a>
+    <div class="nav-links">
+      <a href="#" class="nav-link active" id="nav-home" onclick="navigateTo('home'); return false;">Breeds</a>
+      <a href="#" class="nav-link" id="nav-likes" onclick="navigateTo('likes'); return false;">
+        Liked
+        <span class="badge" id="like-count">0</span>
+      </a>
+    </div>
+    <div class="nav-right">
+      <button class="theme-toggle" id="themeToggle" title="Toggle dark mode">
+        <span id="themeIcon">🌙</span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- TOAST CONTAINER -->
+<div id="toast-container"></div>
+
+<!-- PAGES -->
+<main id="app">
+
+  <!-- HOME PAGE -->
+  <section id="page-home" class="page active">
+    <div class="hero">
+      <div class="hero-content">
+        <p class="hero-eyebrow">Explore Every Breed</p>
+        <h1 class="hero-title">The World's<br/><em>Dog Gallery</em></h1>
+        <p class="hero-sub">Browse hundreds of breeds, discover stunning photos, and build your personal collection.</p>
+      </div>
+      <div class="hero-art">
+        <div class="hero-paw">🐾</div>
+      </div>
+    </div>
+
+    <!-- RECENTLY VIEWED -->
+    <div class="section-wrap" id="recent-section" style="display:none">
+      <div class="section-header">
+        <h2 class="section-title">Recently Viewed</h2>
+      </div>
+      <div class="recent-scroll" id="recent-list"></div>
+    </div>
+
+    <!-- CONTROLS -->
+    <div class="controls-bar">
+      <div class="search-wrap">
+        <span class="search-icon"></span>
+        <input type="text" id="searchInput" placeholder="Search breeds…" class="search-input" />
+        <button class="search-clear" id="searchClear" style="display:none" onclick="clearSearch()">✕</button>
+      </div>
+      <div class="filter-group">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="liked">Liked</button>
+        <button class="filter-btn" data-filter="viewed">Viewed</button>
+      </div>
+      <div class="sort-wrap">
+        <select class="sort-select" id="sortSelect">
+          <option value="az">A → Z</option>
+          <option value="za">Z → A</option>
+          <option value="most-liked">Most Liked</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- BREED GRID -->
+    <div class="breeds-grid" id="breedsGrid"></div>
+    <div class="load-more-wrap" id="loadMoreWrap" style="display:none">
+      <button class="btn-load-more" id="loadMoreBtn" onclick="loadMoreBreeds()">Load More</button>
+    </div>
+    <div class="empty-state" id="emptyState" style="display:none">
+      <div class="empty-icon">🐕</div>
+      <p>No breeds found</p>
+    </div>
+  </section>
+
+  <!-- LIKED PAGE -->
+  <section id="page-likes" class="page">
+    <div class="page-header">
+      <h2 class="page-title">Your Liked Images</h2>
+      <p class="page-sub">Your personal collection of favorite dog photos</p>
+    </div>
+    <div class="liked-grid" id="likedGrid"></div>
+    <div class="empty-state" id="likedEmpty" style="display:none">
+      <div class="empty-icon"></div>
+      <p>No liked images yet. Start exploring!</p>
+      <button class="btn-primary" onclick="navigateTo('home')">Browse Breeds</button>
+    </div>
+  </section>
+
+</main>
+
+<!-- BREED MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal" id="breedModal">
+    <button class="modal-close" onclick="closeBreedModal()">✕</button>
+    <div class="modal-header">
+      <h2 class="modal-breed-name" id="modalBreedName"></h2>
+      <span class="modal-sub-count" id="modalImageCount"></span>
+    </div>
+    <div class="modal-images" id="modalImages"></div>
+    <div class="modal-load-more" id="modalLoadMore" style="display:none">
+      <button class="btn-load-more" onclick="loadMoreModalImages()">Load More Photos</button>
+    </div>
+  </div>
+</div>
+
+<!-- IMAGE ZOOM OVERLAY -->
+<div class="zoom-overlay" id="zoomOverlay" onclick="closeZoom()">
+  <button class="zoom-close" onclick="closeZoom()">✕</button>
+  <img class="zoom-img" id="zoomImg" src="" alt="" />
+  <div class="zoom-actions">
+    <button class="zoom-btn" id="zoomLikeBtn" onclick="toggleLikeFromZoom()">♡ Like</button>
+    <button class="zoom-btn" onclick="shareFromZoom()">↗ Share</button>
+  </div>
+</div>
+
+<script src="/static/js/app.js"></script>
+</body>
+</html>
